@@ -36,7 +36,7 @@ def get_dataloaders():
 
 def get_tabular_data():  # in case we decide to do any traditional ML stuff, we can have a regular data matrix (n x 784)
     """Return train/test dataset in a matrix format (n x 784), with a return statement like the sklearn train_test_split function (X_train, X_test, y_train, y_test).
-    It includes a label_dict as well as a 5th return argument."""
+    """
 
     manual_seed(64)
 
@@ -58,18 +58,20 @@ def get_tabular_data():  # in case we decide to do any traditional ML stuff, we 
     
     test_data = test_dataset.data.reshape(10000, 784)
     test_labels = test_dataset.targets
-
-    label_dict = {
-        0: 'T-shirt/top',
-        1: 'Trouser',
-        2: 'Pullover',
-        3: 'Dress',
-        4: 'Coat',
-        5: 'Sandal',
-        6: 'Shirt',
-        7: 'Sneaker',
-        8: 'Bag',
-        9: 'Ankle boot'
-        }
     
-    return train_data, train_labels, test_data, test_labels, label_dict
+    return train_data, train_labels, test_data, test_labels
+
+
+# labels for the classes
+label_dict = {
+    0: 'T-shirt/top',
+    1: 'Trouser',
+    2: 'Pullover',
+    3: 'Dress',
+    4: 'Coat',
+    5: 'Sandal',
+    6: 'Shirt',
+    7: 'Sneaker',
+    8: 'Bag',
+    9: 'Ankle boot'
+}
