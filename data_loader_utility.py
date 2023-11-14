@@ -76,7 +76,3 @@ label_dict = {
     8: 'Bag',
     9: 'Ankle boot'
 }
-
-
-if __name__ == '__main__':
-    get_dataloaders()
