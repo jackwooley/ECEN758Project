@@ -3,6 +3,7 @@ from torch.utils.data import DataLoader, random_split
 from torch import manual_seed
 from torchvision.transforms import ToTensor
 
+### TODO -- UPDATE SO THAT YOU CAN JUST LOAD THE DATA WO A PROBLEM
 
 def get_dataloaders():
     # set random seed so that all splits from train/val will be the same
@@ -10,7 +11,7 @@ def get_dataloaders():
 
     dataset_60k = FashionMNIST(root='data', 
                            train=True,  # setting this parameter equal to True loads the train dataset, and False will load the test one
-                           download=False,  # only downloads the data if you don't already have it
+                           download=True,  # only downloads the data if you don't already have it
                            transform=ToTensor()  # necessary to load a tensor object and not an image object; will allow us to add a more thorough transformation function later
                            )
 
@@ -24,7 +25,7 @@ def get_dataloaders():
     # load the test set
     test_dataset = FashionMNIST(root='data', 
                            train=False,  # set to False to download the test set
-                           download=False,
+                           download=True,
                            transform=ToTensor()
                            )
     
@@ -75,3 +76,7 @@ label_dict = {
     8: 'Bag',
     9: 'Ankle boot'
 }
+
+
+if __name__ == '__main__':
+    get_dataloaders()
