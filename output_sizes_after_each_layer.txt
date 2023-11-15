@@ -1,0 +1,29 @@
+This shows the output sizes of the model as of commit eeae674 (11/14/2023)
+
+torch.Size([32, 1, 28, 28]) original
+torch.Size([32, 28, 28, 28]) after first conv and before 1st maxpool
+torch.Size([32, 28, 14, 14]) after 1st maxpool
+torch.Size([32, 28, 14, 14]) after dropout
+torch.Size([32, 14, 14, 14]) after 2nd conv
+torch.Size([32, 14, 7, 7]) after 2nd maxpool
+torch.Size([32, 14, 7, 7]) after 3rd conv
+torch.Size([32, 14, 7, 7]) after 2nd pool
+torch.Size([32, 686]) after flattening
+torch.Size([32, 343]) after last dropout layer
+torch.Size([32, 10]) last shape after nn.Linear(343, 10)
+
+
+model summary (homemademodel.pth):
+HomemadeCNN(
+  (conv1): Conv2d(1, 28, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (act1): ReLU()
+  (pool1): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (conv2): Conv2d(28, 14, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (act2): ReLU()
+  (pool2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (flat): Flatten(start_dim=1, end_dim=-1)
+  (fc4): Linear(in_features=686, out_features=343, bias=True)
+  (act4): ReLU()
+  (drop4): Dropout(p=0.2, inplace=False)
+  (fc5): Linear(in_features=343, out_features=10, bias=True)
+)
