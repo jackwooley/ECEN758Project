@@ -1,18 +1,20 @@
 from torchvision.datasets.mnist import FashionMNIST
 from torch.utils.data import DataLoader, random_split
 from torch import manual_seed
-from torchvision.transforms import ToTensor
+from torchvision.transforms import ToTensor, Compose, Normalize
 
 ### TODO -- UPDATE SO THAT YOU CAN JUST LOAD THE DATA WO A PROBLEM
 
 def get_dataloaders():
     # set random seed so that all splits from train/val will be the same
     manual_seed(64)
+    transform = Compose([ToTensor(),
+                         Normalize((0.5), (0.5))])
 
     dataset_60k = FashionMNIST(root='data', 
                            train=True,  # setting this parameter equal to True loads the train dataset, and False will load the test one
                            download=True,  # only downloads the data if you don't already have it
-                           transform=ToTensor()  # necessary to load a tensor object and not an image object; will allow us to add a more thorough transformation function later
+                           transform=transform  # necessary to load a tensor object and not an image object
                            )
 
     # Split the data into train and val sets (50k/10k split to match the 10k test set)
@@ -26,7 +28,7 @@ def get_dataloaders():
     test_dataset = FashionMNIST(root='data', 
                            train=False,  # set to False to download the test set
                            download=True,
-                           transform=ToTensor()
+                           transform=transform
                            )
     
     # test dataloader
@@ -40,11 +42,13 @@ def get_tabular_data():  # in case we decide to do any traditional ML stuff, we 
     """
 
     manual_seed(64)
+    transform = Compose([ToTensor(),
+                         Normalize((0.5), (0.5))])
 
     dataset_60k = FashionMNIST(root='data', 
                            train=True,  # setting this parameter equal to True loads the train dataset, and False will load the test one
                            download=False,  # only downloads the data if you don't already have it
-                           transform=ToTensor()  # necessary to load a tensor object and not an image object; will allow us to add a more thorough transformation function later
+                           transform=transform  # necessary to load a tensor object and not an image object
                            )
 
     train_data = dataset_60k.data.reshape(60000, 784)
