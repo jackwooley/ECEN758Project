@@ -1,0 +1,21 @@
+
+
+
+
+def lda(features, targets, n_components):
+    """Separately fit LDA to train and test sets and return train/test features and targets like sklearn.train_test_split."""
+    np.random.seed(64)
+    X_train_, X_test_, y_train_, y_test_ = train_test_split(features, targets,
+                                                            test_size=.25, random_state=64)
+
+    # transform train data
+    lda_train = LinearDiscriminantAnalysis(n_components=n_components)
+    new_train_features = lda_train.fit_transform(X_train_, y_train_.reshape(-1, 1))
+    new_train_targets = lda_train.transform(X_test_)
+
+    # transform test data
+    lda_test = LinearDiscriminantAnalysis(n_components=n_components)
+    new_test_features = lda_test.fit_transform(X_test_, y_test_.reshape(-1, 1))
+    new_test_targets = lda_test.transform(X_test_)
+
+    return new_train_features, new_test_features, new_train_targets, new_test_targets
