@@ -58,7 +58,7 @@ def get_tabular_data():  # in case we decide to do any traditional ML stuff, we 
     test_dataset = FashionMNIST(root='data', 
                            train=False,  # set to False to download the test set
                            download=False,
-                           transform=ToTensor()
+                           transform=transform
                            )
     
     test_data = test_dataset.data.reshape(10000, 784)
